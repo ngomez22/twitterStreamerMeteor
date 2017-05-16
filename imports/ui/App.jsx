@@ -3,7 +3,7 @@ import {PropTypes} from "prop-types";
 import { Meteor } from "meteor/meteor";
 import { createContainer} from "meteor/react-meteor-data";
 import ColombiaMap from "./ColombiaMap";
-
+import Overlay from "./OL.jsx";
 import TweetsResults from "./TweetsResults.jsx";
 import {Tweets} from "../api/Tweets.js";
 
@@ -15,10 +15,11 @@ export class App extends Component {
 
   getCoordinates() {
     return this.props.tweets.map(tweet => {
-      return {
-        long: tweet.coordinates.coordinates[0],
-        lat: tweet.coordinates.coordinates[1]
-      };
+      return tweet.coordinates.coordinates;
+      // return {
+      //   long: tweet.coordinates.coordinates[0],
+      //   lat: tweet.coordinates.coordinates[1]
+      // };
     });
   }
 
