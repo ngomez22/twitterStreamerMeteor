@@ -8,10 +8,18 @@ export default class OL extends Component {
     super(props);
   }
 
+  drawTweet() {
+    let c = document.getElementById("myCanvas");
+    let canvas = c.getContext("2d");
+    canvas.beginPath();
+    canvas.arc(95,50,40,0,2*Math.PI);
+    canvas.stroke();
+  }
+
   render() {
     return (
       <div>
-        <canvas width="600" height="600" style="border:1px solid #000000;"/>
+        <canvas id="overlay" width="600" height="600" style="border:1px solid #000000;"/>
       </div>
     );
   }
