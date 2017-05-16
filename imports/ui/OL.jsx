@@ -25,6 +25,5 @@ export default class OL extends Component {
   }
 
   componentWillUpdate(newProps) {
-
   }
 }
