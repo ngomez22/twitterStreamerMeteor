@@ -13,6 +13,7 @@ export default class ColombiaMap extends Component {
 	getProjection() {
 		return this.projection;
 	}
+
 	componentDidMount() {
 		var width = this.props.width || 960,
 		    height = this.props.height || 500,
@@ -29,6 +30,8 @@ export default class ColombiaMap extends Component {
 		  // Center the Map in Colombia
 		  .center([-74, 4.5])
 		  .translate([width / 2, height / 2]);
+
+		this.props.setProj(this.projection);
 
 		var path = d3.geo.path()
 		  .projection(this.projection);

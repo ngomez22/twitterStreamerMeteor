@@ -10,7 +10,24 @@ import {Tweets} from "../api/Tweets.js";
 export class App extends Component {
   constructor(props) {
     super(props);
+    this.projection = null;
+  }
 
+  getCoordinates() {
+    return this.props.tweets.map(tweet => {
+      return {
+        long: tweet.coordinates.coordinates[0],
+        lat: tweet.coordinates.coordinates[1]
+      };
+    });
+  }
+
+  getProjection() {
+    return this.projection
+  }
+
+  setProjection(p) {
+    this.projection = p;
   }
 
   changeQuery(evt) {
@@ -27,13 +44,15 @@ export class App extends Component {
 
 
   render() {
-    console.log("render!");
+    console.log(this.getCoordinates());
     return (
       <div>
+        <h1>Final exam</h1>
         <ColombiaMap
           width="600"
           height="600"
           data={{RISARALDA:10}}
+          setProj={this.setProjection.bind(this)}
         />
         <input type="text" onKeyPress={this.changeQuery.bind(this)} placeholder="Query"/>
         { this.props && this.props.err ?
