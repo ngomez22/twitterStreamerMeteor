@@ -18,7 +18,13 @@ export class App extends Component {
 
   getCoordinates() {
     return this.props.tweets.map(tweet => {
-      return this.projection(tweet.coordinates.coordinates);
+      return {
+        id: tweet.id,
+        retweeted: tweet.retweeted,
+        place: tweet.place,
+        color: tweet.user['profile_background_color'],
+        coords: this.projection(tweet.coordinates.coordinates)
+      }
     });
   }
 
@@ -44,31 +50,34 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <div className="row center">
-          <h1>Final exam</h1>
+        <div className="row">
+          <h1 className="text-center">Final exam</h1>
         </div>
-        <div>
-          <Overlay
-            coordinates={this.getCoordinates()}
-          />
-          <ColombiaMap
-            width="600"
-            height="600"
-            data={{RISARALDA:10}}
-            setProj={this.setProjection.bind(this)}
-            style={{}}
-          />
+        <div className="row">
+          <div className="col-md-6">
+            <Overlay
+              coordinates={this.getCoordinates()}
+            />
+            <ColombiaMap
+              width="600"
+              height="600"
+              data={{RISARALDA:0}}
+              setProj={this.setProjection.bind(this)}
+            />
+          </div>
+          <div className="col-md-6">
+            <input type="text" onKeyPress={this.changeQuery.bind(this)} placeholder="Query"/>
+            { this.props && this.props.err ?
+              <div>Error: {this.props.err}</div> :
+              <span></span>
+            }
+            <h2>Results:</h2>
+            {this.props && this.props.tweets ?
+              <TweetsResults tweets={this.props.tweets}/> :
+              <p>Enter a query</p>
+            }
+          </div>
         </div>
-        <input type="text" onKeyPress={this.changeQuery.bind(this)} placeholder="Query"/>
-        { this.props && this.props.err ?
-          <div>Error: {this.props.err}</div> :
-          <span></span>
-        }
-        <h2>Results:</h2>
-        {this.props && this.props.tweets ?
-          <TweetsResults tweets={this.props.tweets}/> :
-          <p>Enter a query</p>
-        }
       </div>
     );
   }

@@ -1,15 +1,26 @@
 # Final Exam - WebDev
+To run this application, clone the repository and `cd` into it. To save your twitter credentials, run the following commands
 
-A simple boilerplate for a Meteor 1.4 Twitter streamer application with React. Uses the twitter [npm](https://www.npmjs.com/package/twitter) module for connecting to twitter. It requires you to setup your credentials on the server using environment variables:
 
+##### Unix
 ```
 export TWITTER_CONSUMER_KEY="yourCredentialsHere"
 export TWITTER_CONSUMER_SECRET="yourCredentialsHere"
 export TWITTER_ACCESS_TOKEN_KEY="yourCredentialsHere"
 export TWITTER_ACCESS_TOKEN_SECRET="yourCredentialsHere"
+```
 
+###### Windows
+```
+set TWITTER_CONSUMER_KEY=yourCredentialsHere
+set TWITTER_CONSUMER_SECRET=yourCredentialsHere
+set TWITTER_ACCESS_TOKEN_KEY=yourCredentialsHere
+set TWITTER_ACCESS_TOKEN_SECRET=yourCredentialsHere
+```
+
+Then, to actually run the application, execute these commands
+
+```
 meteor npm install
 meteor
 ```
-
-This is a very basic implementation that handles a global search shared by all users and doesn't implement any security or restriction. It's intended as a starting point, so add your own requirements.

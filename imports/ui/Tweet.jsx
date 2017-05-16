@@ -5,6 +5,7 @@ import { Meteor } from "meteor/meteor";
 
 export default class Tweet extends Component {
   render() {
+    console.log(this.props.tweet);
     return (<div className="tweet">
     	<span>{this.props.tweet.created_at} </span>
     	<span>{this.props.tweet.user.screen_name} </span>
