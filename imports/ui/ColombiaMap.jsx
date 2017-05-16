@@ -13,7 +13,6 @@ export default class ColombiaMap extends Component {
 	getProjection() {
 		return this.projection;
 	}
-
 	componentDidMount() {
 		var width = this.props.width || 960,
 		    height = this.props.height || 500,

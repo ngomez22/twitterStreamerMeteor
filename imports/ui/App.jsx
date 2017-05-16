@@ -1,11 +1,14 @@
-import React, {Component} from "react";
-import {PropTypes} from "prop-types";
+import React, { Component } from "react";
+import { PropTypes } from "prop-types";
 import { Meteor } from "meteor/meteor";
-import { createContainer} from "meteor/react-meteor-data";
-import ColombiaMap from "./ColombiaMap";
-import Overlay from "./OL.jsx";
+import { createContainer } from "meteor/react-meteor-data";
+
+import ColombiaMap from "./ColombiaMap.jsx";
+import Overlay from "./Overlay.jsx";
 import TweetsResults from "./TweetsResults.jsx";
-import {Tweets} from "../api/Tweets.js";
+import { Tweets } from "../api/Tweets.js";
+
+import "./App.css";
 
 export class App extends Component {
   constructor(props) {
@@ -15,11 +18,7 @@ export class App extends Component {
 
   getCoordinates() {
     return this.props.tweets.map(tweet => {
-      return tweet.coordinates.coordinates;
-      // return {
-      //   long: tweet.coordinates.coordinates[0],
-      //   lat: tweet.coordinates.coordinates[1]
-      // };
+      return this.projection(tweet.coordinates.coordinates);
     });
   }
 
@@ -40,21 +39,26 @@ export class App extends Component {
 
     console.log(evt.target.value);
     Meteor.call("twitter.stream", evt.target.value);
-
   }
 
-
   render() {
-    console.log(this.getCoordinates());
     return (
       <div>
-        <h1>Final exam</h1>
-        <ColombiaMap
-          width="600"
-          height="600"
-          data={{RISARALDA:10}}
-          setProj={this.setProjection.bind(this)}
-        />
+        <div className="row center">
+          <h1>Final exam</h1>
+        </div>
+        <div>
+          <Overlay
+            coordinates={this.getCoordinates()}
+          />
+          <ColombiaMap
+            width="600"
+            height="600"
+            data={{RISARALDA:10}}
+            setProj={this.setProjection.bind(this)}
+            style={{}}
+          />
+        </div>
         <input type="text" onKeyPress={this.changeQuery.bind(this)} placeholder="Query"/>
         { this.props && this.props.err ?
           <div>Error: {this.props.err}</div> :

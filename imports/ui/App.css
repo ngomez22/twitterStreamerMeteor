@@ -1,0 +1,6 @@
+#c {
+  border: 1px solid black;
+  pointer-events: none;
+  position: relative;
+  z-index: 20;
+}
