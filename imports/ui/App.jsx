@@ -57,6 +57,18 @@ export class App extends Component {
     });
   }
 
+  getFirstTen() {
+    return this.props.tweets.sort(
+      (a, b) => {
+        return b.id - a.id;
+      }
+    ).filter(
+      (tweet, index) => {
+        if (index<10) return true;
+        else return false;
+    });
+  }
+
   render() {
     return (
       <div>
@@ -105,7 +117,7 @@ export class App extends Component {
             }
             <h4>Latest tweets:</h4>
             {this.props && this.props.tweets ?
-              <TweetsResults tweets={this.props.tweets}/> :
+              <TweetsResults tweets={this.getFirstTen()}/> :
               <p>Enter a query</p>
             }
           </div>
