@@ -17,10 +17,13 @@ export default class Overlay extends Component {
 
     canvas.beginPath();
     if (this.props.figure === 'S') {
+      // Draw a square
       canvas.rect(x-3, y-3, 6, 6);
     } else if (this.props.figure === 'C') {
+      // Draw a circle
       canvas.arc(x, y, 3, 0, 2*Math.PI);
     } else {
+      // Draw a triangle
       canvas.moveTo(x-3, y-3);
       canvas.lineTo(x+3, y-3);
       canvas.lineTo(x, y+3);
@@ -48,6 +51,7 @@ export default class Overlay extends Component {
   componentDidUpdate() {
     let c = document.getElementById("c");
     let canvas = c.getContext("2d");
+    // Clear the canvas to avoid repainting tweets
     canvas.clearRect(0, 0, 600, 600)
     this.props.coordinates.forEach((coord) => {
       this.drawTweet(coord);

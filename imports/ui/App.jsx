@@ -60,8 +60,8 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <div className="row">
-          <h1 className="text-center">Final exam</h1>
+        <div className="row text-center">
+          <h1>Final exam</h1>
         </div>
         <div className="row">
           <div className="col-md-6">
