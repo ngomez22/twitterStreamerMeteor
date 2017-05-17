@@ -10,7 +10,6 @@ let stream = null;
 // This is a in memory only collection
 export const Tweets = new Mongo.Collection("tweets");
 
-
 // Twitter streamer should run only on the server
 if (Meteor.isServer) {
   Meteor.publish("tweets", function tweetsPublication() {

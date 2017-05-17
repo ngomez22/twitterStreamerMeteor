@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { PropTypes } from "prop-types";
 import { Meteor } from "meteor/meteor";
 import { createContainer } from "meteor/react-meteor-data";
+import { Well } from "react-bootstrap";
 
 import ColombiaMap from "./ColombiaMap.jsx";
 import Overlay from "./Overlay.jsx";
@@ -13,6 +14,9 @@ import "./App.css";
 export class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      figure: 'C'
+    }
     this.projection = null;
   }
 
@@ -47,6 +51,12 @@ export class App extends Component {
     Meteor.call("twitter.stream", evt.target.value);
   }
 
+  changeFigure(fig) {
+    this.setState({
+      figure: fig
+    });
+  }
+
   render() {
     return (
       <div>
@@ -57,6 +67,7 @@ export class App extends Component {
           <div className="col-md-6">
             <Overlay
               coordinates={this.getCoordinates()}
+              figure={this.state.figure}
             />
             <ColombiaMap
               width="600"
@@ -64,6 +75,25 @@ export class App extends Component {
               data={{RISARALDA:0}}
               setProj={this.setProjection.bind(this)}
             />
+            <div className="row">
+              <div id="salsa" className="col-md-11">
+                <Well>
+                  <div>
+                    <h2 className="text-center">Choose a figure!</h2>
+                    <div className="col-md-4">
+                      <button className="btn" onClick={() => {this.changeFigure('C')}}>Circle</button>
+                    </div>
+                    <div className="col-md-4">
+                      <button className="btn" onClick={() => {this.changeFigure('T')}}>Triangle</button>
+                    </div>
+                    <div className="col-md-4">
+                      <button className="btn" onClick={() => {this.changeFigure('S')}}>Square</button>
+                    </div>
+                    <br /><br />
+                  </div>
+                </Well>
+              </div>
+            </div>
           </div>
           <div className="col-md-6">
             <input type="text" onKeyPress={this.changeQuery.bind(this)} placeholder="Query"/>

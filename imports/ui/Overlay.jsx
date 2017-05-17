@@ -12,11 +12,19 @@ export default class Overlay extends Component {
   drawTweet(info) {
     let c = document.getElementById("c");
     let canvas = c.getContext("2d");
+    let x = info.coords[0];
+    let y = info.coords[1];
+
     canvas.beginPath();
-    if (info.retweeted) {
-      ctx.rect(info.coords[0]-3, info.coords[0]-3, 6, 6);
+    if (this.props.figure === 'S') {
+      canvas.rect(x-3, y-3, 6, 6);
+    } else if (this.props.figure === 'C') {
+      canvas.arc(x, y, 3, 0, 2*Math.PI);
     } else {
-      canvas.arc(info.coords[0], info.coords[1], 3, 0, 2*Math.PI);
+      canvas.moveTo(x-3, y-3);
+      canvas.lineTo(x+3, y-3);
+      canvas.lineTo(x, y+3);
+      canvas.lineTo(x-3, y-3);
     }
     canvas.fillStyle = '#' + info.color;
     canvas.fill()
@@ -25,12 +33,9 @@ export default class Overlay extends Component {
 
   render() {
     return (
-      <div style={{position: 'absolute', 'pointer-events': 'none'}}>
-        <canvas id="c" width="600" height="600"/>
-        {
-
-        }
-      </div>
+        <div className="row" style={{marginLeft: '0px', position: 'absolute', 'pointerEvents': 'none'}}>
+          <canvas id="c" width="600" height="600"/>
+        </div>
     );
   }
 
@@ -41,6 +46,9 @@ export default class Overlay extends Component {
   }
 
   componentDidUpdate() {
+    let c = document.getElementById("c");
+    let canvas = c.getContext("2d");
+    canvas.clearRect(0, 0, 600, 600)
     this.props.coordinates.forEach((coord) => {
       this.drawTweet(coord);
     });
