@@ -62,6 +62,8 @@ export class App extends Component {
       <div>
         <div className="row text-center">
           <h1>Final exam</h1>
+          <h4 className="text-muted">Nicolás Gómez G.</h4>
+          <hr />
         </div>
         <div className="row">
           <div className="col-md-6">
@@ -96,12 +98,12 @@ export class App extends Component {
             </div>
           </div>
           <div className="col-md-6">
-            <input type="text" onKeyPress={this.changeQuery.bind(this)} placeholder="Query"/>
+            <input  className="col-md-12" type="text" onKeyPress={this.changeQuery.bind(this)} placeholder="Query"/>
             { this.props && this.props.err ?
               <div>Error: {this.props.err}</div> :
               <span></span>
             }
-            <h2>Results:</h2>
+            <h4>Latest tweets:</h4>
             {this.props && this.props.tweets ?
               <TweetsResults tweets={this.props.tweets}/> :
               <p>Enter a query</p>
