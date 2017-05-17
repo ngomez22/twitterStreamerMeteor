@@ -110,7 +110,7 @@ export class App extends Component {
             </div>
           </div>
           <div className="col-md-6">
-            <input  className="col-md-12" type="text" onKeyPress={this.changeQuery.bind(this)} placeholder="Query"/>
+            <input  className="col-md-12" type="text" onKeyPress={this.changeQuery.bind(this)} placeholder="Query (Press enter)"/>
             { this.props && this.props.err ?
               <div>Error: {this.props.err}</div> :
               <span></span>
